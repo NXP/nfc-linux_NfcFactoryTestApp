@@ -23,3 +23,6 @@ dummy:
 
 clean:
 	rm NfcFactoryTestApp
+
+install:
+	cp NfcFactoryTestApp /usr/local/bin/

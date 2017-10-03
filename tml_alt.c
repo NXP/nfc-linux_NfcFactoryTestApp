@@ -68,7 +68,7 @@ static int verifyPin( int pin, int isoutput, int edge ) {
         // Pin not exported yet
         if ( ( fd = open( "/sys/class/gpio/export", O_WRONLY ) ) > 0 ) {
             sprintf(buf, "%d", pin);
-            if ( write( fd, buf, strlen(buf) == strlen(buf))) {
+            if ( write( fd, buf, strlen(buf)) == strlen(buf)) {
                 hasGpio = 1;
             }
             close( fd );
@@ -77,7 +77,7 @@ static int verifyPin( int pin, int isoutput, int edge ) {
         hasGpio = 1;
         close( fd );
     }
-
+    usleep(100000);
     if ( hasGpio ) {
         // Make sure it is an output
         sprintf( buf, "/sys/class/gpio/gpio%d/direction", pin );
