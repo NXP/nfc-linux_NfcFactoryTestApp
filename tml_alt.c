@@ -27,6 +27,7 @@
  *  0 = Custom configuration
  *  1 = OM557x on Raspberry Pi
  *  2 = OM557x on UdooNeo
+ *  3 = OM557x on BeagleBone black
  */
 #define CONFIGURATION    1
 
@@ -42,6 +43,12 @@
  #define I2C_ADDRESS     0x28
  #define PIN_INT         105
  #define PIN_ENABLE      149
+#elif (CONFIGURATION == 3)
+/* OM557x on BeagleBone black */
+ #define I2C_BUS         "/dev/i2c-2"
+ #define I2C_ADDRESS     0x28
+ #define PIN_INT         61
+ #define PIN_ENABLE      30
 #else
 /* Custom configuration */
  #define I2C_BUS         "/dev/i2c-1"
@@ -68,7 +75,7 @@ static int verifyPin( int pin, int isoutput, int edge ) {
         // Pin not exported yet
         if ( ( fd = open( "/sys/class/gpio/export", O_WRONLY ) ) > 0 ) {
             sprintf(buf, "%d", pin);
-            if ( write( fd, buf, strlen(buf) == strlen(buf))) {
+            if ( write( fd, buf, strlen(buf)) == strlen(buf)) {
                 hasGpio = 1;
             }
             close( fd );
@@ -77,7 +84,7 @@ static int verifyPin( int pin, int isoutput, int edge ) {
         hasGpio = 1;
         close( fd );
     }
-
+    usleep(100000);
     if ( hasGpio ) {
         // Make sure it is an output
         sprintf( buf, "/sys/class/gpio/gpio%d/direction", pin );
