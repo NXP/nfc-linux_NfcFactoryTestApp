@@ -1,0 +1,10 @@
+NXP Software Content Register
+
+--------------------------------------------
+Repository:                NXP/nfc-linux_NfcFactoryTestApp
+Outgoing License:          NXP Proprietary
+Type of content:           Source code
+Description and comments:  NFC Factory Test application for characterization of the PN71xx NFC Controller integration into linux based device
+Release Location:          https://github.com/NXP/nfc-linux_NfcFactoryTestApp.git
+Origin:                    NXP (proprietary)
+--------------------------------------------
